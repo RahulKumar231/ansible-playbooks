@@ -1,0 +1,12 @@
+--- # creating a folder
+- name: 
+  hosts: all
+  user: ansible
+  become: yes
+  connection: ssh
+
+  tasks:
+    - name: creating radha file
+      file:
+        path: /home/ansible/radha
+        state: directory

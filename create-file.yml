@@ -1,0 +1,12 @@
+--- # creating a file
+- name: 
+  hosts: all 
+  user: ansible
+  become: yes
+  connection: ssh
+
+  tasks:
+    - name: create a rahulfile
+      file:
+        path: /home/ansible/rahulfile
+        state: touch

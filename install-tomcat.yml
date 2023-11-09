@@ -1,0 +1,40 @@
+--- # installing Java and Tomcat
+- name:
+  hosts: all
+  become: yes
+  user: ansible
+  connection: ssh
+
+  tasks:
+    - name: installing Java on RedHat
+      yum:             # ansible.builtin.yum is full name of module
+        name: java
+        state: present
+      when: ansible_os_family == "RedHat"
+
+    - name: installing Java on Debian
+      apt:            # ansible.builtin.apt is full name of module
+        name: default_jdk     # java package name in Debian OS
+        state: present
+      when: ansible_os_family == "Debian"
+
+    - name: download tomcat package
+      get_url:       # ansible.builtin.get_url is full name of module to download 
+        url: https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.95/bin/apache-tomcat-8.5.95.tar.gz
+        dest: /home/ansible
+
+    - name: extracting tomcat package
+      unarchive:     # ansible.builtin.unarchive is complete module name to extract file
+        src: /home/ansible/apache-tomcat-8.5.95.tar.gz
+        dest: /home/ansible
+        remote_src: yes      # this will verify once if the file is there.
+
+    - name: providing executable permissions
+      file:
+        path: /home/ansible/apache-tomcat-8.5.95/bin/startup.sh
+        mode: 777          # to give full permission
+
+    - name: start tomcat service
+      ansible.builtin.shell: nohup ./startup.sh     # nohup means, after executing the shell script, if we move that script file to different directory, that service will be continuos running
+      args:
+        chdir: /home/ansible/apache-tomcat-8.5.95/bin/  # location of startup.sh file

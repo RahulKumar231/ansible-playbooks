@@ -1,0 +1,12 @@
+--- # deleting a folder
+- name:
+  hosts: webserver:appserver[0]
+  user: ansible
+  become: true
+  connection: ssh
+
+  tasks:
+    - name: deleting folder1
+      file:
+        path: /home/ansible/folder1
+        state: absent 

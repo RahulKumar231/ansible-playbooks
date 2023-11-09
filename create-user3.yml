@@ -1,0 +1,10 @@
+--- # creating user 3
+- name: my playbook to create 3rd user
+  hosts: all
+  user: ansible
+  become: yes
+  connection: ssh
+
+  tasks:
+    - name: create user ritika
+      action: user name=ritika state=present

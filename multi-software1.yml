@@ -1,0 +1,16 @@
+--- # my playbook to install multiple softwares
+- name: 
+  hosts: webserver[0:2]
+  become: yes
+  user: ansible
+  connection: ssh
+
+  tasks:
+    - name: installing multiple packages
+      yum: name='{{item}}' state=absent
+      with_items:
+        - httpd
+        - mysql
+        - docker
+        - tree
+        - git

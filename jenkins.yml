@@ -1,0 +1,39 @@
+--- # install jenkins
+- name: 
+  hosts: all
+  become: yes
+  user: ansible
+  connection: ssh
+
+  tasks:
+    - name: installing java
+      yum:
+        name: java-11*
+        state: present
+    
+    - name: install wget 
+      yum:
+        name: wget
+        state: present
+
+    - name: download jenkins
+      get_url:
+        url: https://pkg.jenkins.io/redhat-stable/jenkins.repo
+        dest: /etc/yum.repos.d/jenkins.repo
+
+    - name: download jenkins key
+      rpm_key:                # RedHat Package Manager
+        state: present
+        key: https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+
+    - name: installig jenking
+      yum:
+        name: jenkins
+        state: present
+
+    - name: starting jenkins service
+      service: 
+        name: jenkins
+        state: started
+        enabled: yes         #always keep jenkins service running like chkconfig jenkins on
+

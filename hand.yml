@@ -1,0 +1,16 @@
+--- # my handler section
+- name:
+  hosts: all
+  become: yes
+  user: ansible
+  connection: ssh
+
+  tasks:
+    - name: installting httpd
+      action: yum name=httpd state=present
+      notify: starting httpd service
+
+
+  handlers:
+    - name: starting httpd service
+      action: service name=httpd state=started

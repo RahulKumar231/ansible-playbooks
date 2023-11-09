@@ -1,0 +1,16 @@
+--- # my conditional palybook
+- name:
+  hosts: all
+  become: yes
+  user: ansible
+  connection: ssh
+
+
+  tasks:
+    - name: install docker for debain
+      command: apt-get install docker -y
+      when: ansible_os_family == "Debian"
+
+    - name: install git for redhat
+      command: yum install git -y
+      when: ansible_os_family == "RedHat"

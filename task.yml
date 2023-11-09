@@ -1,0 +1,12 @@
+--- # my task playbooks
+- hosts: webserver:appserver
+  user: ansible
+  become: yes
+  connection: ssh
+
+  tasks:
+    - name: installing httpd
+      action: yum pkg=httpd state=absent
+
+    - name: installing docker
+      action: yum pkg=docker state=absent

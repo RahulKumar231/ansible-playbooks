@@ -1,0 +1,11 @@
+--- # my variable section
+- name:
+  hosts: all
+  become: yes
+
+  vars:
+    pkgname: httpd
+
+  tasks:
+    - name: install httpd on webserver
+      action: yum name='{{pkgname}}'

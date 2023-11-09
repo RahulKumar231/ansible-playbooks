@@ -1,0 +1,14 @@
+--- # copying the file from server to host
+- name:
+  hosts: all
+  become: yes
+  user: ansible
+  connection: ssh
+
+  tasks:
+    - name: copying index.html file
+      copy:
+        src: /home/ansible/index.html
+        dest: /home/ansible
+        owner: ritika
+

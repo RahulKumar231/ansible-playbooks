@@ -1,0 +1,10 @@
+--- # creating secnd user
+- name: my playbook to create second user
+  hosts: appserver
+  user: ansible
+  become: yes
+  connection: ssh
+
+  tasks:
+    - name: creating user rohit
+      action: user name=rohit

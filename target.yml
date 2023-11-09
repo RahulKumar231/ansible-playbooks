@@ -1,0 +1,5 @@
+--- # my target section
+- hosts: webserver[0:1]:appserver[1:2]
+  user: ansible
+  become: yes
+  connection: ssh

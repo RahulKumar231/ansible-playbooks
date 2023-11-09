@@ -1,0 +1,6 @@
+--- # this is demo file
+- hosts: webservers
+  tasks:
+    - name: installing httpd on webserver
+      action: yum pkg=httpd state: installed
+

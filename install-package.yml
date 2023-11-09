@@ -1,0 +1,12 @@
+--- # installing packages
+- name: 
+  hosts: all
+  user: ansible
+  connection: ssh
+
+  tasks:
+    - name: installing docker
+      yum:
+        name: git
+        state: installed
+
